@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <p>{animal1}</p>
-      <p>{animal2}</p>
+      <p className='texto'>{animal2}</p>
       <Header />
       <Body />
       <Dados atributo1='atributo1' atributo2='atributo2' atributo3={animal3} soma={soma} />
