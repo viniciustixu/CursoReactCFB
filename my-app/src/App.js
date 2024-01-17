@@ -1,17 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
-import Numero from './Components/Numero';
+import Led from './Components/Led';
 
 
 function App() {
 
-  const [num, setNum] = useState(10);
+  const [ligado, setLigado] = useState(false);
 
   return (
     <>
-      <p>Valor do state num em App: {num}</p>
-      <Numero num={num} setNum={setNum} />
+      <Led />
     </>
   );
 }
