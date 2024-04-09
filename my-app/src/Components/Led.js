@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import verde from './imgs/verde.jpg';
-import vermelho from './imgs/vermelho.png';
+import vermelho from './imgs/Vermelho.jpg';
 
 
 
