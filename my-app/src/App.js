@@ -1,37 +1,34 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.css'; 32111231231;
 import React, { useState } from 'react';
+import Nota from './Components/Nota';
+import Resultado from './Components/Resultado';
 
 
 
 function App() {
 
-  const [form, setForm] = useState({ "nome": "", "curso": "", "ano": "" });
+  const [notas, setNotas] = useState({ "nota1": "0", "nota2": "1", "nota3": "0", "nota4": "0" });
 
-  const handleFormChange = (e) => {
-    if (e.target.getAttribute('name') == 'fNome') {
-      setForm({ "nome": e.target.value, "curso": form.curso, "ano": form.ano });
-    } else if (e.target.getAttribute('name') == 'fCurso') {
-      setForm({ "nome": form.nome, "curso": e.target.value, "ano": form.ano });
-    } else if (e.target.getAttribute('name') == 'fAno') {
-      setForm({ "nome": form.nome, "curso": form.curso, "ano": e.target.value });
-    }
+  const handleSetNotas = (e) => {
+    if (e.target.getAttribute("name") === "nota1") {
+      setNotas({ "nota1": e.target.value, "nota2": notas.nota2, "nota3": notas.nota3, "nota4": notas.nota4 });
+    } else if (e.target.getAttribute("name") === "nota2") {
+      setNotas({ "nota1": notas.nota1, "nota2": e.target.value, "nota3": notas.nota3, "nota4": notas.nota4 });
+    } else if (e.target.getAttribute("name") === "nota3") {
+      setNotas({ "nota1": notas.nota1, "nota2": notas.nota2, "nota3": e.target.value, "nota4": notas.nota4 });
+    } else if (e.target.getAttribute("name") === "nota4") {
+      setNotas({ "nota1": notas.nota1, "nota2": notas.nota2, "nota3": notas.nota3, "nota4": e.target.value });
+    };
   };
 
   return (
     <>
-      <label htmlFor="formNome">Nome</label>
-      <input type="text" name="fNome" id="formNome" value={form.nome} onChange={(e) => handleFormChange(e)} />
-
-      <label htmlFor="formCurso">Curso</label>
-      <input type="text" name="fCurso" id="formCurso" value={form.curso} onChange={(e) => handleFormChange(e)} />
-
-      <label htmlFor="formAno">Ano</label>
-      <input type="text" name="fAno" id="formAno" value={form.ano} onChange={(e) => handleFormChange(e)} />
-
-      <p>Nome digitado: {form.nome} </p>
-      <p>Curso digitado: {form.curso} </p>
-      <p>Ano digitado: {form.ano} </p>
+      <Nota num={1} nome={'nota1'} nota={notas.nota1} setNota={handleSetNotas} />
+      <Nota num={2} nome={'nota2'} nota={notas.nota2} setNota={handleSetNotas} />
+      <Nota num={3} nome={'nota3'} nota={notas.nota3} setNota={handleSetNotas} />
+      <Nota num={4} nome={'nota4'} nota={notas.nota4} setNota={handleSetNotas} />
+      <Resultado somaNotas={parseFloat(notas.nota1) + parseFloat(notas.nota2) + parseFloat(notas.nota3) + parseFloat(notas.nota4)} />
     </>
   );
 };
