@@ -1,21 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
-import React, { useState } from 'react';
-import Caixa from './Components/Caixa';
-import Canal from './Components/Canal';
+import React, { useState, useEffect } from 'react';
 
 
 
 function App() {
+  const [contagem, setContagem] = useState(0);
+
+  useEffect(
+    () => {
+      console.log("pagina carregada");
+      document.title = 'Contagem: ' + contagem;
+    }
+  );
+
+
 
   return (
     <>
-      <Caixa site="www.google.com">
-        <p>Componente 1 filho do Caixa</p>
-        <p>Componente 2 filho do Caixa</p>
-        <p>Componente 3 filho do Caixa</p>
-        <Canal />
-      </Caixa>
+      <p>Contagem: {contagem}</p>
+      <button onClick={() => setContagem(contagem + 1)}>Contar</button>
     </>
   );
 };
