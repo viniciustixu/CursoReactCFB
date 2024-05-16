@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import Classe from './Components/Classe';
+import Carro from './Components/Carro';
 
 
 function App() {
 
   return (
     <>
-      <Classe canal="CFB Cursos" curso="Curso de React" />
+      <Carro />
       <h1>Componentes de classe</h1>
     </>
   );
