@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <Carro />
+      <Carro fator={10} />
       <h1>Componentes de classe</h1>
     </>
   );
