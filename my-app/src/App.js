@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Carro from './Components/Carro';
@@ -5,10 +6,19 @@ import Carro from './Components/Carro';
 
 function App() {
 
+  const [carro, setCarro] = useState(true);
+  const mostrarOcultarCarro = () => {
+    setCarro(!carro);
+  };
+
   return (
     <>
-      <Carro fator={10} />
-      <h1>Componentes de classe</h1>
+      <h1>Componente de classe</h1>
+      {carro ? <Carro fator={10} /> : ''}
+
+      <button onClick={() => mostrarOcultarCarro()}>
+        Ocultar
+      </button>
     </>
   );
 };
