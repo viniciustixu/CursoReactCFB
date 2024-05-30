@@ -47,22 +47,28 @@ function App() {
     return (
       <div style={tabu}>
         <div style={tabuLinha}>
-          <div style={casa} data-pos='00' onClick="">{j[0][0]}</div>
-          <div style={casa} data-pos='01' onClick="">{j[0][1]}</div>
-          <div style={casa} data-pos='02' onClick="">{j[0][2]}</div>
+          <div style={casa} data-pos='00' onClick={(e) => joga(e)}>{j[0][0]}</div>
+          <div style={casa} data-pos='01' onClick={(e) => joga(e)}>{j[0][1]}</div>
+          <div style={casa} data-pos='02' onClick={(e) => joga(e)}>{j[0][2]}</div>
         </div>
         <div style={tabuLinha}>
-          <div style={casa} data-pos='10' onClick="">{j[1][0]}</div>
-          <div style={casa} data-pos='11' onClick="">{j[1][1]}</div>
-          <div style={casa} data-pos='12' onClick="">{j[1][2]}</div>
+          <div style={casa} data-pos='10' onClick={(e) => joga(e)}>{j[1][0]}</div>
+          <div style={casa} data-pos='11' onClick={(e) => joga(e)}>{j[1][1]}</div>
+          <div style={casa} data-pos='12' onClick={(e) => joga(e)}>{j[1][2]}</div>
         </div>
         <div style={tabuLinha}>
-          <div style={casa} data-pos='20' onClick="">{j[2][0]}</div>
-          <div style={casa} data-pos='21' onClick="">{j[2][1]}</div>
-          <div style={casa} data-pos='22' onClick="">{j[2][2]}</div>
+          <div style={casa} data-pos='20' onClick={(e) => joga(e)}>{j[2][0]}</div>
+          <div style={casa} data-pos='21' onClick={(e) => joga(e)}>{j[2][1]}</div>
+          <div style={casa} data-pos='22' onClick={(e) => joga(e)}>{j[2][2]}</div>
         </div>
       </div>
     );
+  };
+
+  const BtnJogarNovamente = () => {
+    if (!jogando) {
+      return <button onClick={() => reiniciar()}>Jogar novamente</button>;
+    }
   };
 
   const verificaVitoria = () => {
@@ -102,10 +108,8 @@ function App() {
     // diagonal 1
     pontos = 0;
     for (let d = 0; d < 3; d++) {
-      if (jogo[d][d]) {
-        if (jogo[l][c] == simboloAtual) {
-          pontos++;
-        }
+      if (jogo[d][d] == simboloAtual) {
+        pontos++;
       }
     }
     if (pontos >= 3) {
@@ -134,7 +138,7 @@ function App() {
 
   const retPos = (e) => {
     const p = e.target.getAttribute('data-pos');
-    const pos = [parseInt(p.subString(0, 1)), parseInt(p.subString(1, 2))];
+    const pos = [parseInt(p.substring(0, 1)), parseInt(p.substring(1, 2))];
     return pos;
   };
 
@@ -146,11 +150,43 @@ function App() {
     }
   };
 
+  const joga = (e) => {
+    if (jogando) {
+      if (verificaEspacoVazio(e)) {
+        jogo[retPos(e)[0]][retPos(e)[1]] = simboloAtual;
+        trocaJogador();
+        if (verificaVitoria()) {
+          trocaJogador();
+          alert('Jogador ' + simboloAtual + ' venceu!');
+          setJogando(false);
+        } else {
+
+        }
+      }
+    }
+  };
+
+  const reiniciar = () => {
+    setJogando(true);
+    setJogo(jogoInicial);
+    setSimboloAtual('X');
+  };
+
 
 
   return (
     <>
+      <div>
+        <p>Quem joga: {simboloAtual}</p>
+      </div>
 
+      <div>
+        {tabuleiro(jogo)}
+      </div>
+
+      <div>
+        {BtnJogarNovamente()}
+      </div>
     </>
   );
 };
