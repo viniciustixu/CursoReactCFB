@@ -34,19 +34,41 @@ function App() {
 
   //FUNCOES
   const addDigitoTela = (d) => {
+    // Verifica se o último caractere é um operador
+    const operadores = ['+', '-', '*', '/'];
+    const ultimoCaractere = valorTela.slice(-1);
+
+    if (operadores.includes(d) && operadores.includes(ultimoCaractere)) {
+      // Substitui o último operador com o novo operador
+      setValorTela(valorTela.slice(0, -1) + d);
+      return;
+    }
+
+    // Verifica se o ponto já foi inserido no número atual
+    const partes = valorTela.split(/[\+\-\*\/]/);
+    const ultimaParte = partes[partes.length - 1];
+
+    if (d === '.' && ultimaParte.includes('.')) {
+      return;
+    }
+
     if ((d == '+' || d == '-' || d == '*' || d == '/') && operado) {
       console.log("+-*/");
       setOperado(false);
       setValorTela(resultado + d);
       return;
-    } if (operado) {
+    }
+
+    if (operado) {
       setValorTela(d);
       setOperado(false);
       return;
     }
+
     const valorDigitadoTela = valorTela + d;
     setValorTela(valorDigitadoTela);
   };
+
 
   const limparMemoria = () => {
     setOperado(false);
