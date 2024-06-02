@@ -1,27 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default class ListaCarros extends React.Component {
+export default function ListaCarros() {
 
-  state = {
-    carros: []
-  };
+  const [carros, setCarros] = useState([]);
 
-  componentDidMount() {
+  useEffect(() => {
     axios.get('https://aa3181fd-69ad-4a4e-84b5-a5204fa73158-00-lq72kyyhqfwq.worf.replit.dev/').then(res => {
       const dadosCarros = res.data;
-      this.setState({ carros: dadosCarros });
+      setCarros(dadosCarros);
     });
+  });
 
-  }
 
-  render() {
-    return (
-      <div>
-        {this.state.carros.map(
-          carro => <div key={carro.id}>{carro.id} - {carro.marca} - {carro.modelo}</div>
-        )}
-      </div>
-    );
-  }
+
+  return (
+    <div>
+      {carros.map(
+        carro => <div key={carro.id}>{carro.id} - {carro.marca} - {carro.modelo}</div>
+      )}
+    </div>
+  );
 }
